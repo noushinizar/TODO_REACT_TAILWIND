@@ -112,7 +112,8 @@ function Today(){
                     onChange={(e) => setEditText(e.target.value)}
                     className='input h-[25px] bg-zinc-100 text-black'
                   />
-                ) : (
+                )
+                : (
                   task
                 )}
               </div>
