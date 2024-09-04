@@ -11,7 +11,7 @@ import  side from '/src/assets/icons8-expand-arrow-16.png'
 import { useState } from 'react'
 function Today(){
   const [input,setInput] =useState('')
-  const [task,setTask] =useState('')
+  const [task,setTask] =useState([])
   const [cTask,setCTask]=useState([])
   const [editIndex, setEditIndex] = useState(null);
   const [editText, setEditText] = useState('');
@@ -37,7 +37,7 @@ function Today(){
       };
       const completeTask = (index) => {
         const newTasks = [...task];
-        const completedTask = newTasks.splice(index, 1)[0];  
+        const completedTask = newTasks.splice(index, 1);  
         setTask(newTasks);
         setCTask([...cTask, completedTask]);  
       };
