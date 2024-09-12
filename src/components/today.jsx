@@ -8,14 +8,32 @@ import del from '/src/assets/icons8-delete-50.png'
 import save from '/src/assets/icons8-save-24.png'
 import down from '/src/assets/icons8-chevron-24.png'
 import  side from '/src/assets/icons8-expand-arrow-16.png'
-import { useState } from 'react'
+import { useState,useEffect } from 'react'
 function Today(){
   const [input,setInput] =useState('')
   const [task,setTask] =useState([])
   const [cTask,setCTask]=useState([])
+  const [trashTask, setTrashTask] = useState([]);
   const [editIndex, setEditIndex] = useState(null);
   const [editText, setEditText] = useState('');
   const [ismin,setIsmin] = useState(false)
+
+
+  useEffect(() => {
+    const savedTasks = JSON.parse(localStorage.getItem('tasks')) || [];
+    const savedCompletedTasks = JSON.parse(localStorage.getItem('completedTasks')) || [];
+    setTask(savedTasks);
+    setCTask(savedCompletedTasks);
+    console.log("getitem");
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem('tasks', JSON.stringify(task));
+    localStorage.setItem('completedTasks', JSON.stringify(cTask));
+    console.log("setitem");
+  }, [task, cTask]);
+
+
 
   const AddTask = () => {
    if(input){
@@ -43,12 +61,13 @@ function Today(){
       };
 
   const deleteTask=(index)=>{
+    const deletedTask = task[index];
     const newTodos = [...task];
     newTodos.splice(index, 1);
     setTask(newTodos);
     cTask.splice(index,1);
     setCTask(cTask)
-    
+    setTrashTask([...trashTask, deletedTask])
   }
   const toggleMinimize = () => {
     setIsmin(!ismin);
@@ -115,6 +134,7 @@ function Today(){
                 )
                 : (
                   task
+                  
                 )}
               </div>
               <div className='flex gap-[20px]'>

@@ -4,7 +4,7 @@ import Navbar from "./components/navbar";
 import Sidebar from "./components/sidebar";
 import Today from "./components/today";
 import Loader from './components/Loader';
-import { BrowserRouter as Router, Route, Routes, BrowserRouter } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes,  } from 'react-router-dom';
 import Week from './components/week';
 import Inbox from './components/inbox';
 import Compleated from './components/compleated';
